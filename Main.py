@@ -2,7 +2,7 @@ import pygame
 import sys
 import os
 import numpy as np
-from .constants import WIDTH, HEIGHT
+from constants import WIDTH, HEIGHT
 from board import Board
 
 
@@ -40,6 +40,8 @@ def main():
                 pass
 
         board.draw_board(screen)
+        board.draw_pieces(screen)
+        pygame.display.update()
 
     pygame.quit()
 
