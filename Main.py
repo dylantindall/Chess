@@ -2,7 +2,7 @@ import pygame
 import sys
 import os
 import numpy as np
-from constants import WIDTH, HEIGHT
+from constants import WIDTH, HEIGHT, SQUARE_SIZE
 from board import Board
 
 
@@ -17,6 +17,13 @@ from board import Board
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Chess")        
 
+# Convert the mouse position on screen to a tile on the board
+def get_tile_from_mouse(pos):
+
+    x, y = pos
+    col = x // SQUARE_SIZE
+    row = y // SQUARE_SIZE
+    return col, row
 
 #define framerate:
 FPS = 60
@@ -25,6 +32,8 @@ def main():
     run = True
     clock = pygame.time.Clock()
     board = Board()
+
+    selected_piece = None
 
     while run:
         clock.tick(FPS)
@@ -37,7 +46,10 @@ def main():
 
             # check if mouse has been clicked.
             if event.type == pygame.MOUSEBUTTONDOWN:
-                pass
+                mouse_pos = pygame.mouse.get_pos()
+                selected_col, selected_row = get_tile_from_mouse(mouse_pos)
+                board.find_piece_at(selected_col, selected_row)
+
 
         board.draw_board(screen)
         board.draw_pieces(screen)

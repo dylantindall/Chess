@@ -30,7 +30,7 @@ class Board:
         for row in range(ROWS):
             for col in range(COLS):
                 if self.board[row, col] != '--':
-                    print(f"Found piece at [{row},{col}]: {self.board[row, col]}")
+
                     piece = self.board[row, col]
                     
                     # Center the piece in the square
@@ -38,5 +38,15 @@ class Board:
                     y = row * SQUARE_SIZE + (SQUARE_SIZE - scale_y) // 2
                     
                     screen.blit(images[piece], (x, y))
+
+    def find_piece_at(self, row, col):
+        if 0 <= row < 8 and 0 <= col < 8:
+            if self.board[row, col].startswith(self.colour):
+                return self.board[row, col]
+        return None
+
+
+
+
                     
         
